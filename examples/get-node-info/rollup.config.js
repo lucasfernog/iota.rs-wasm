@@ -53,7 +53,7 @@ export default {
 		wasm(),
 		copy({
 			targets: [{
-				src: '../../wasm-web/iota_wasm_bg.wasm',
+				src: 'node_modules/iota-rs-wasm/wasm-web/iota_wasm_bg.wasm',
 				dest: 'public',
 				rename: 'iota_wasm.wasm'
 			}]
