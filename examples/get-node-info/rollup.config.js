@@ -55,7 +55,7 @@ export default {
 			targets: [{
 				src: '../../wasm-web/iota_wasm_bg.wasm',
 				dest: 'public',
-				rename: 'bundle_bg.wasm'
+				rename: 'iota_wasm.wasm'
 			}]
 		})
 	],

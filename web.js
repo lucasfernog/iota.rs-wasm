@@ -27,7 +27,7 @@ class Client {
     }
 
     __getClient() {
-        return wasm().then(() => {
+        return wasm('iota_wasm.wasm').then(() => {
             return new WasmClient(this.uri)
         })
     }
