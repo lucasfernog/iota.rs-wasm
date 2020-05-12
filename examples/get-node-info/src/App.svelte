@@ -4,8 +4,17 @@
 	
 	let client = new Client('https://nodes.comnet.thetangle.org')
 	promise = client.getNodeInfo().then(res => {
-		return JSON.stringify(res)
+		setTimeout(() => {
+			promise = client
+				.getNewAddress('RVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVA')
+				.index(1)
+				.security(3)
+				.generate()
+		}, 3000)
+		return res
 	})
+
+	$: promise = promise.then(res => JSON.stringify(res))
 </script>
 
 <main>

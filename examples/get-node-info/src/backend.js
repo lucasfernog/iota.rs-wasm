@@ -1,22 +1,49 @@
 import wasm from '../../../Cargo.toml'
 
+class AddressGenerator {
+    constructor(generator, seed) {
+        this.generator = generator
+        this.__seed = seed
+    }
+
+    generate() {
+        return this.generator(this.__seed, this.__index, this.__security)
+    }
+
+    index(index) {
+        this.__index = BigInt(index)
+        return this
+    }
+
+    security(security) {
+        this.__security = security
+        return this
+    }
+}
+
 class Client {
     constructor(uri) {
-        this.clientPromise = wasm().then(({ Client }) => {
-            this.client = new Client(uri)
-            this.clientPromise = null
-            return this.client
-        })
+        this.uri = uri
     }
 
     __getClient() {
-        return this.clientPromise || Promise.resolve(this.client)
+        return wasm().then(({ Client }) => {
+            return new Client(this.uri)
+        })
     }
 
     getNodeInfo() {
         return this.__getClient().then(client => {
           return client.getNodeInfo()
         })
+    }
+
+    getNewAddress(seed) {
+        return new AddressGenerator((seed, index, security) => {
+            return this.__getClient().then(client => {
+                return client.getNewAddress(seed, index, security)
+            })
+        }, seed)
     }
 }
 
