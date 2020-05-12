@@ -1,4 +1,4 @@
 /node_modules/
 /public/build/
-
+/public/bundle_bg.wasm
 .DS_Store

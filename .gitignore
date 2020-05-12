@@ -3,4 +3,5 @@
 Cargo.lock
 
 node_modules
-pkg
+wasm-web
+wasm-node

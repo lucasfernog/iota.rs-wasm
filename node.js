@@ -1,4 +1,11 @@
-import wasm from '../../../Cargo.toml'
+const wasm = require('./wasm-node/iota_wasm')
+
+const fetch = require('node-fetch')
+global.Headers = fetch.Headers
+global.Request = fetch.Request
+global.Response = fetch.Response
+global.Window = Object
+global.fetch = fetch
 
 class AddressGenerator {
     constructor(generator, seed) {
@@ -27,14 +34,12 @@ class Client {
     }
 
     __getClient() {
-        return wasm().then(({ Client }) => {
-            return new Client(this.uri)
-        })
+        return Promise.resolve(new wasm.Client(this.uri))
     }
 
     getNodeInfo() {
         return this.__getClient().then(client => {
-          return client.getNodeInfo()
+            return client.getNodeInfo()
         })
     }
 
@@ -47,6 +52,4 @@ class Client {
     }
 }
 
-export {
-    Client
-}
+module.exports = { Client }

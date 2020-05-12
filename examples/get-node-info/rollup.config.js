@@ -3,7 +3,8 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
-import rust from '@wasm-tool/rollup-plugin-rust';
+import wasm from '@rollup/plugin-wasm';
+import copy from 'rollup-plugin-copy';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -49,8 +50,13 @@ export default {
 		// instead of npm run dev), minify
 		production && terser(),
 
-		rust({
-			serverPath: "build/",
+		wasm(),
+		copy({
+			targets: [{
+				src: '../../wasm-web/iota_wasm_bg.wasm',
+				dest: 'public',
+				rename: 'bundle_bg.wasm'
+			}]
 		})
 	],
 	watch: {

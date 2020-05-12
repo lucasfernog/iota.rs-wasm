@@ -1,5 +1,5 @@
 <script>
-	import { Client } from './backend'
+	import { Client } from '../../../web'
 	let promise;
 	
 	let client = new Client('https://nodes.comnet.thetangle.org')
