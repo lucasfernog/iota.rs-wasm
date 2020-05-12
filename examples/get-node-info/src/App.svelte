@@ -1,0 +1,42 @@
+<script>
+	import { Client } from './backend'
+	let promise;
+	
+	let client = new Client('https://nodes.comnet.thetangle.org')
+	promise = client.getNodeInfo().then(res => {
+		return JSON.stringify(res)
+	})
+</script>
+
+<main>
+	{#await promise}
+		<h1>...waiting</h1>
+	{:then res}
+		<h1>Promise resolved</h1>
+		<span>{ res }</span>
+	{:catch error}
+		<h1 style="color: red">Promise rejected: {error}</h1>
+	{/await}
+</main>
+
+<style>
+	main {
+		text-align: center;
+		padding: 1em;
+		max-width: 240px;
+		margin: 0 auto;
+	}
+
+	h1 {
+		color: #ff3e00;
+		text-transform: uppercase;
+		font-size: 4em;
+		font-weight: 100;
+	}
+
+	@media (min-width: 640px) {
+		main {
+			max-width: none;
+		}
+	}
+</style>
