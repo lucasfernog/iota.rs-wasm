@@ -55,6 +55,7 @@ fn js_error<T: std::fmt::Debug>(e: T) -> JsValue {
 impl Client {
     #[wasm_bindgen(constructor)]
     pub fn new(uri: &str) -> Result<Client, JsValue> {
+        console_error_panic_hook::set_once();
         let client = Client {
             client: iota::Client::new(uri)
                 .map_err(|e| e.to_string())?

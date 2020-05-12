@@ -15,3 +15,4 @@ wasm-bindgen-futures = "0.4"
 iota-core = { path = "../iota.rs/iota-core" }
 iota-conversion = { version = "0.5.0", path = "../iota.rs/iota-conversion" }
 serde = { version = "1.0", features = ["derive"] }
+console_error_panic_hook = "0.1.6"
