@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build:nodejs": "wasm-pack build --target nodejs --out-dir wasm-node",
-    "build:web": "wasm-pack build --target web --out-dir wasm-web",
+    "build:web": "wasm-pack build --target web --out-dir wasm-web && node ./build/web",
     "build": "yarn build:web && yarn build:nodejs",
     "pretest": "yarn build:nodejs",
     "prepublish": "yarn build",

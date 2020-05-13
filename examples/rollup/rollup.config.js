@@ -55,7 +55,7 @@ export default {
 			targets: [{
 				src: 'node_modules/iota-rs-wasm/wasm-web/iota_wasm_bg.wasm',
 				dest: 'public',
-				rename: 'iota_wasm.wasm'
+				rename: 'iota_client.wasm'
 			}]
 		})
 	],
