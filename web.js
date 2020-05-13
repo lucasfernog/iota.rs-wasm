@@ -1,4 +1,5 @@
-import wasm, { Client as WasmClient } from './wasm-web/iota_wasm'
+import initWasm, { Client as WasmClient } from './wasm-web/iota_wasm'
+let __initializedIotaWasm = false
 
 class AddressGenerator {
     constructor(generator, seed) {
@@ -27,7 +28,11 @@ class Client {
     }
 
     __getClient() {
-        return wasm('iota_wasm.wasm').then(() => {
+        if (__initializedIotaWasm) {
+            return Promise.resolve(new WasmClient(this.uri))
+        }
+        return initWasm('iota_client.wasm').then(() => {
+            __initializedIotaWasm = true
             return new WasmClient(this.uri)
         })
     }
