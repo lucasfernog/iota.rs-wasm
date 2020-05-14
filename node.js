@@ -1,4 +1,4 @@
-const wasm = require('./wasm-node/iota_wasm')
+const { Client: WasmClient } = require('./wasm-node/iota_wasm')
 
 const fetch = require('node-fetch')
 global.Headers = fetch.Headers
@@ -34,20 +34,16 @@ class Client {
     }
 
     __getClient() {
-        return Promise.resolve(new wasm.Client(this.uri))
+        return Promise.resolve(new WasmClient(this.uri))
     }
 
     getNodeInfo() {
-        return this.__getClient().then(client => {
-            return client.getNodeInfo()
-        })
+        return this.__getClient().then(client => client.getNodeInfo())
     }
 
     getNewAddress(seed) {
         return new AddressGenerator((seed, index, security) => {
-            return this.__getClient().then(client => {
-                return client.getNewAddress(seed, index, security)
-            })
+            return this.__getClient().then(client => client.getNewAddress(seed, index, security))
         }, seed)
     }
 }

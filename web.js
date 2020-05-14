@@ -38,16 +38,12 @@ class Client {
     }
 
     getNodeInfo() {
-        return this.__getClient().then(client => {
-            return client.getNodeInfo()
-        })
+        return this.__getClient().then(client => client.getNodeInfo())
     }
 
     getNewAddress(seed) {
         return new AddressGenerator((seed, index, security) => {
-            return this.__getClient().then(client => {
-                return client.getNewAddress(seed, index, security)
-            })
+            return this.__getClient().then(client => client.getNewAddress(seed, index, security))
         }, seed)
     }
 }
