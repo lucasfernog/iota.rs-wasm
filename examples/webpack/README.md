@@ -1,26 +1,64 @@
-# Quasar App (vue-app)
+# svelte app
 
-A Quasar Framework app
+This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template-webpack.
 
-## Install the dependencies
+To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+
 ```bash
-yarn
+npx degit sveltejs/template-webpack svelte-app
+cd svelte-app
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+
+
+## Get started
+
+Install the dependencies...
+
 ```bash
-quasar dev
+cd svelte-app
+npm install
 ```
 
-### Lint the files
+...then start webpack:
+
 ```bash
-yarn run lint
+npm run dev
 ```
 
-### Build the app for production
+Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and the page should reload with your changes.
+
+
+## Deploying to the web
+
+### With [now](https://zeit.co/now)
+
+Install `now` if you haven't already:
+
 ```bash
-quasar build
+npm install -g now
 ```
 
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+Then, from within your project folder:
+
+```bash
+now
+```
+
+As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
+
+### With [surge](https://surge.sh/)
+
+Install `surge` if you haven't already:
+
+```bash
+npm install -g surge
+```
+
+Then, from within your project folder:
+
+```bash
+npm run build
+surge public
+```
