@@ -1,9 +1,7 @@
 async function run () {
   const { Client } = require('./node')
   const client = new Client('https://nodes.comnet.thetangle.org')
-  return client.getNewAddress('RVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVA')
-    .security(3)
-    .generate()
+  return client.getUncheckedAddress('RVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVA')
     .then(res => res.address)
 }
 

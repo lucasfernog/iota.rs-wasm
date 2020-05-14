@@ -1,8 +1,11 @@
 use wasm_bindgen::prelude::*;
 use iota::crypto::Kerl;
-use iota::signing::{IotaSeed, Seed};
+use iota::signing::{
+    IotaSeed, Seed, PrivateKey, PrivateKeyGenerator, PublicKey, WotsPrivateKeyGeneratorBuilder,
+    WotsSecurityLevel,
+};
 use iota::ternary::{T1B1Buf, TryteBuf};
-use iota::bundle::TransactionField;
+use iota::bundle::{ Address, TransactionField };
 use iota_conversion::Trinary;
 use serde::Serialize;
 
@@ -69,6 +72,42 @@ impl Client {
             .await
             .map_err(|e| JsValue::from(e.to_string()))?;
         let res = response_to_js_value(node_info)?;
+        Ok(res)
+    }
+
+    #[wasm_bindgen(js_name = "getUncheckedAddress")]
+    pub fn get_unchecked_address(&self, seed: String) -> Result<JsValue, JsValue> {
+        let seed = IotaSeed::<Kerl>::from_buf(
+            TryteBuf::try_from_str(&seed)
+            .unwrap()
+            .as_trits()
+            .encode::<T1B1Buf>(),
+        )
+        .unwrap();
+
+        let address: Address = Address::try_from_inner(
+            WotsPrivateKeyGeneratorBuilder::<Kerl>::default()
+                .security_level(WotsSecurityLevel::Medium)
+                .build()
+                .unwrap()
+                .generate(&seed, 3)
+                .unwrap()
+                .generate_public_key()
+                .unwrap()
+                .trits()
+                .to_owned(),
+        )
+        .unwrap();
+
+        let new_address = NewAddress {
+            index: 0,
+            address: address
+                .to_inner()
+                .as_i8_slice()
+                .trytes()
+                .map_err(js_error)?
+        };
+        let res = response_to_js_value(new_address)?;
         Ok(res)
     }
 

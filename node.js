@@ -39,8 +39,10 @@ class Client {
 
     getNodeInfo() {
         return this.__getClient().then(client => {
-            return client.getNodeInfo()
-        })
+    }
+
+    getUncheckedAddress(seed) {
+        return this.__getClient().then(client => client.getUncheckedAddress(seed))
     }
 
     getNewAddress(seed) {
