@@ -100,11 +100,6 @@
     is-module "^1.0.0"
     resolve "^1.14.2"
 
-"@rollup/plugin-wasm@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-wasm/-/plugin-wasm-4.0.0.tgz#b5ac4713d8bbc958e5781d1f8e5f5e7a896a06fb"
-  integrity sha512-rs5PNZHlI27UfHJKWsgeact+LrT6Ux3Uq5rxjQmoBtuTeK5HbDBdQuaDyJsWQE1TwqVF+qv21qC2nj83Hb6HPw==
-
 "@rollup/pluginutils@^3.0.0", "@rollup/pluginutils@^3.0.8":
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-3.0.10.tgz#a659b9025920378494cd8f8c59fbf9b3a50d5f12"

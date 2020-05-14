@@ -3,7 +3,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
-import wasm from '@rollup/plugin-wasm';
 import copy from 'rollup-plugin-copy';
 
 const production = !process.env.ROLLUP_WATCH;
@@ -50,7 +49,6 @@ export default {
 		// instead of npm run dev), minify
 		production && terser(),
 
-		wasm(),
 		copy({
 			targets: [{
 				src: 'node_modules/iota-rs-wasm/wasm-web/iota_wasm_bg.wasm',
