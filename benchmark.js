@@ -6,7 +6,7 @@ async function run () {
 }
 
 async function benchmark () {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 500; i++) {
     await run().then(console.log)
   }
 }
